@@ -14,10 +14,17 @@ class UsersController < ApplicationController
         #create key/value pair in the session hash and uses user_id to log them in
         session[:user_id] = user.id
         #redirect to user profile(show.erb)
+        redirect "/users/#{user.id}"
        else
         #show error
         redirect '/login'
        end 
+    end 
+
+    #users show route
+    get '/users/:id' do 
+        binding.pry
+        "user's show page!"
     end 
 
 end
