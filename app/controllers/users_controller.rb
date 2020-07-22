@@ -3,7 +3,7 @@ class UsersController < ApplicationController
     #make sure you render views here!
 
     get '/login' do 
-        erb :login
+        erb :'users/login'
     end 
 
     post '/login' do 
@@ -34,7 +34,19 @@ class UsersController < ApplicationController
         erb :'/users/signup'
     end 
 
-    
+    #post sign up route
+    post '/users' do 
+        @user = User.create(params)
+        session[:user_id] = @user.id
+        redirect "/users/#{@user.id}"
+    end 
+
+    #user logout
+    get '/logout' do 
+        session.clear
+        redirect '/'
+    end
+
 
 
 
