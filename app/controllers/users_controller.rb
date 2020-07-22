@@ -23,8 +23,19 @@ class UsersController < ApplicationController
 
     #users show route
     get '/users/:id' do 
-        binding.pry
-        "user's show page!"
+        #find user
+        @user = User.find_by(id: params[:id])
+        erb :'/users/show'
     end 
+
+    #sign up route
+    get '/signup' do
+        # render sign up form
+        erb :'/users/signup'
+    end 
+
+    
+
+
 
 end
