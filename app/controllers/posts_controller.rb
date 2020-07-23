@@ -29,4 +29,5 @@ class PostsController < ApplicationController
         erb :"/posts/show"
     end 
     
+    #update
 end
