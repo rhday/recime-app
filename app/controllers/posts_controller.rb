@@ -8,5 +8,12 @@ class PostsController < ApplicationController
         #use instance variable so view can use it
         erb :'posts/index'
     end
+
+    # show route for single post
+    get 'posts/:id' do 
+        #find the post
+        @post = Post.find_by(params[:id])
+        erb :"/posts/show"
+    end 
     
 end
