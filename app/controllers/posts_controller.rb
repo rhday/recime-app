@@ -30,4 +30,18 @@ class PostsController < ApplicationController
     end 
     
     #update
+    #create link to edit foorm on post show page
+    #get route for the edit form
+    get '/posts/:id/edit' do 
+        @post = Post.find_by(params[:id])
+        erb :'/posts/edit'
+    end 
+
+    #remember `use Rack::MethodOverride` in config.ru
+    #this patch will send our params to and update a new post (or resource)
+    patch '/posts/:id' do 
+        @post = Post.find_by(params[:id])
+        @post.update(title: params[:title], image_url: params[:image_url], description: params[:description])
+        redirect "/posts/#{@post.id}"
+    end 
 end
