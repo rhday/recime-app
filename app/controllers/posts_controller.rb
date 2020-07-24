@@ -44,4 +44,14 @@ class PostsController < ApplicationController
         @post.update(title: params[:title], image_url: params[:image_url], description: params[:description])
         redirect "/posts/#{@post.id}"
     end 
+
+    #delete function to complete CRUD
+    #create link for delete on posts show page
+    #`use Rack::MethodOverride` in config.ru
+    #delete route to delete our selected post
+    delete '/posts/:id' do 
+        @post = Post.find_by(params[:id])
+        @post.destroy
+        redirect '/posts'
+    end 
 end
