@@ -25,7 +25,8 @@ class PostsController < ApplicationController
     # show route for single post
     get '/posts/:id' do 
         #find the post
-        @post = Post.find_by(params[:id])
+        @post = Post.find(params[:id])
+        #binding.pry
         erb :"/posts/show"
     end 
     
@@ -33,14 +34,14 @@ class PostsController < ApplicationController
     #create link to edit foorm on post show page
     #get route for the edit form
     get '/posts/:id/edit' do 
-        @post = Post.find_by(params[:id])
+        @post = Post.find(params[:id])
         erb :'/posts/edit'
     end 
 
     #remember `use Rack::MethodOverride` in config.ru
     #this patch will send our params to and update a new post (or resource)
     patch '/posts/:id' do 
-        @post = Post.find_by(params[:id])
+        @post = Post.find(params[:id])
         @post.update(title: params[:title], image_url: params[:image_url], description: params[:description])
         redirect "/posts/#{@post.id}"
     end 
@@ -51,7 +52,7 @@ class PostsController < ApplicationController
     #delete route to delete our selected post
     delete '/posts/:id' do 
         #start by finding the post you want to delete
-        @post = Post.find_by(params[:id])
+        @post = Post.find(params[:id])
         #delete it
         @post.destroy
         #redirect to the posts page
