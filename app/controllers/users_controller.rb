@@ -13,10 +13,14 @@ class UsersController < ApplicationController
        if user && user.authenticate(params[:password])
         #create key/value pair in the session hash and uses user_id to log them in
         session[:user_id] = user.id
+        # add success message to flash hash
+        flash[:message] = "Welcome back #{user.name}!"
         #redirect to user profile(show.erb)
         redirect "/users/#{user.id}"
        else
         #show error
+        flash[:error] = "Your input was invalid. Please try again."
+        #redirect back to login
         redirect '/login'
        end 
     end 

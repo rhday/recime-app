@@ -50,8 +50,11 @@ class PostsController < ApplicationController
     #`use Rack::MethodOverride` in config.ru
     #delete route to delete our selected post
     delete '/posts/:id' do 
+        #start by finding the post you want to delete
         @post = Post.find_by(params[:id])
+        #delete it
         @post.destroy
+        #redirect to the posts page
         redirect '/posts'
     end 
 end
