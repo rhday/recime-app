@@ -16,9 +16,18 @@ class PostsController < ApplicationController
 
     #create needs one more route
     post "/posts" do 
-        #recieves new params from user input in the create new post form
-        post = Post.create(title: params[:title], image_url: params[:image_url], description: params[:description], user_id: current_user.id)
-        redirect "/posts/#{post.id}"
+        if params[:title] != "" && params[:image_url] != "" && params[:description] != ""
+            #recieves new params from user input in the create new post form
+            post = Post.create(title: params[:title], image_url: params[:image_url], description: params[:description], user_id: current_user.id)
+            #show post creation success message
+            flash[:message] = "New post created successfully!"
+            #redirect to post show page
+            redirect "/posts/#{post.id}"
+        else 
+            #show post creation error message
+            flash[:error] = "Failed to create post. Please fill out all fields!"
+            redirect "/posts/new"
+        end 
     end 
 
     #this route needs to be underneath the "new" route although you build it first
