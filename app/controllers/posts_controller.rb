@@ -14,6 +14,7 @@ class PostsController < ApplicationController
         if logged_in?
             erb :'posts/new'
         else 
+            #show error an dredirect
             flash[:error] = "You must be logged in to create a post!"
             redirect "/"
         end

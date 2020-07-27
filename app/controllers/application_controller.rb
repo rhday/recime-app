@@ -33,6 +33,13 @@ class ApplicationController < Sinatra::Base
       !!current_user 
     end
 
+    #authorization helper for update/delete post
+    #take in argument of post
+    def auth_to_edit(post)
+      #if the user from the post == current_user
+      post.user == current_user
+    end
+
   end 
 
 end
