@@ -11,7 +11,12 @@ class PostsController < ApplicationController
 
     #create - render form to create new post
     get '/posts/new' do
-        erb :'posts/new'
+        if logged_in?
+            erb :'posts/new'
+        else 
+            flash[:error] = "You must be logged in to create a post!"
+            redirect "/"
+        end
     end 
 
     #create needs one more route
@@ -27,7 +32,7 @@ class PostsController < ApplicationController
             redirect "/posts/#{post.id}"
         else 
             #show post creation error message
-            flash[:error] = "Failed to create post. Please fill out all fields!"
+            flash[:error] = "Failed to create post. Please fill out all fields: #{post.errors.full_messages.to_sentence}"
             redirect "/posts/new"
         end 
     end 
