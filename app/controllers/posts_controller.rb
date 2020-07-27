@@ -52,7 +52,7 @@ class PostsController < ApplicationController
     #get route for the edit form
     get '/posts/:id/edit' do 
         @post = Post.find(params[:id])
-        if id auth_to_edit(@post)
+        if authorized_to_edit(@post)
             erb :'/posts/edit'
         else
             #show error message
