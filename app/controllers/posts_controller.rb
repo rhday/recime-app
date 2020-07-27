@@ -16,9 +16,11 @@ class PostsController < ApplicationController
 
     #create needs one more route
     post "/posts" do 
-        if params[:title] != "" && params[:image_url] != "" && params[:description] != ""
-            #recieves new params from user input in the create new post form
-            post = Post.create(title: params[:title], image_url: params[:image_url], description: params[:description], user_id: current_user.id)
+        #recieves new params from user input in the create new post form
+        post = Post.create(title: params[:title], image_url: params[:image_url], description: params[:description], user_id: current_user.id)
+        if post.save
+            #if the input is valid - .save triggers our validation
+        #if params[:title] != "" && params[:image_url] != "" && params[:description] != ""
             #show post creation success message
             flash[:message] = "New post created successfully!"
             #redirect to post show page
