@@ -14,4 +14,6 @@ use PostsController
 
 use UsersController
 
+use LikesController
+
 run ApplicationController
