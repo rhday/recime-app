@@ -81,4 +81,20 @@ class PostsController < ApplicationController
         #redirect to the posts page
         redirect '/posts'
     end 
+
+    post '/posts/:id/like' do 
+        @post = Post.find(params[:id])
+        #creating the relationship between User, Post and Like by creating a new like
+        @like = Like.create(user: current_user, post: @post)
+        render '/posts/show' 
+    end 
+
+    delete '/posts/:id/unlike' do 
+        @post = Post.find(params[:id])
+        #grabbing the specific instance of a like in question to delete it
+        @like = Like.find_by(user: current_user, post: @post)
+        @like.destroy 
+        render 'posts/show'
+    end 
+
 end
