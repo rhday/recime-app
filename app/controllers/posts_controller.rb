@@ -90,9 +90,11 @@ class PostsController < ApplicationController
     end 
 
     delete '/posts/:id/unlike' do 
+        #find the correct post
         @post = Post.find(params[:id])
-        #grabbing the specific instance of a like in question to delete it
+        #find and grab the specific instance of a like in question to delete it
         @like = Like.find_by(user: current_user, post: @post)
+        #destroy the instance of the like
         @like.destroy 
         render 'posts/show'
     end 

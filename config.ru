@@ -10,10 +10,11 @@ end
 use Rack::MethodOverride
 
 #mount controllers here:
+
+use LikesController
+
 use PostsController
 
 use UsersController
-
-use LikesController
 
 run ApplicationController
