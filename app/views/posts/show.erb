@@ -4,6 +4,7 @@
 <form class="" action="/posts/<%= @post.id %>/like" method="post">
     <input type="submit" name="" value="Like this Post!">
 </form>
+<p>Likes:<%= @likes.count %></p>
 
 <strong>Created at: <%= @post.created_at %></strong>
 <p><%= @post.description %></p>

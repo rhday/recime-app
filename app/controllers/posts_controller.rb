@@ -43,6 +43,7 @@ class PostsController < ApplicationController
     get '/posts/:id' do 
         #find the post
         @post = Post.find(params[:id])
+        @likes = @post.likes
         #binding.pry
         erb :"/posts/show"
     end 
@@ -86,7 +87,10 @@ class PostsController < ApplicationController
         @post = Post.find(params[:id])
         #creating the relationship between User, Post and Like by creating a new like
         @like = Like.create(user: current_user, post: @post)
-        render '/posts/show' 
+        #create instance variable consisting of the likes for specific post
+        @likes = @post.likes 
+        #binding.pry
+        erb :"/posts/show" 
     end 
 
     delete '/posts/:id/unlike' do 
@@ -96,7 +100,7 @@ class PostsController < ApplicationController
         @like = Like.find_by(user: current_user, post: @post)
         #destroy the instance of the like
         @like.destroy 
-        render 'posts/show'
+        erb :"posts/show"
     end 
 
 end
