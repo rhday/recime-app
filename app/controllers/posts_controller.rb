@@ -86,7 +86,11 @@ class PostsController < ApplicationController
     post '/posts/:id/like' do 
         @post = Post.find(params[:id])
         #creating the relationship between User, Post and Like by creating a new like
-        @like = Like.create(user: current_user, post: @post)
+        if already_liked?
+            flash[:error] = "You can't like the same post twice!"
+        else
+            @like = Like.create(user: current_user, post: @post)
+        end 
         #create instance variable consisting of the likes for specific post
         @likes = @post.likes 
         #binding.pry
@@ -98,8 +102,11 @@ class PostsController < ApplicationController
         @post = Post.find(params[:id])
         #find and grab the specific instance of a like in question to delete it
         @like = Like.find_by(user: current_user, post: @post)
+        @likes = @post.likes
         #destroy the instance of the like
-        @like.destroy 
+        if @like
+            @like.destroy
+        end 
         erb :"posts/show"
     end 
 

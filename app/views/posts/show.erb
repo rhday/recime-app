@@ -4,6 +4,10 @@
 <form class="" action="/posts/<%= @post.id %>/like" method="post">
     <input type="submit" name="" value="Like this Post!">
 </form>
+<form class="" action="/posts/<%= @post.id %>/unlike" method="post">
+    <input type="hidden" name="_method" value="delete">
+    <input type="submit" name="" value="Unlike this Post!">
+</form>
 <p>Likes:<%= @likes.count %></p>
 
 <strong>Created at: <%= @post.created_at %></strong>

@@ -40,6 +40,16 @@ class ApplicationController < Sinatra::Base
       post.user == current_user
     end
 
+    def already_liked?
+      Like.where(user_id: current_user.id, post_id:
+      params[:id]).exists?
+    end
+  
+    def find_like
+      Like.where(user_id: current_user.id, post_id:
+      params[:id])
+  end
+
   end 
 
 end
