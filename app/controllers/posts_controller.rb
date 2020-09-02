@@ -94,7 +94,7 @@ class PostsController < ApplicationController
         #create instance variable consisting of the likes for specific post
         @likes = @post.likes 
         #binding.pry
-        erb :"/posts/show" 
+        redirect "/posts/#{params[:id]}" 
     end 
 
     delete '/posts/:id/unlike' do 
