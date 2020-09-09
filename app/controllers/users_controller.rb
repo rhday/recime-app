@@ -40,9 +40,17 @@ class UsersController < ApplicationController
 
     #post sign up route
     post '/users' do 
+
         @user = User.create(params)
-        session[:user_id] = @user.id
-        redirect "/users/#{@user.id}"
+        if @user.valid?
+            session[:user_id] = @user.id
+            redirect "/users/#{@user.id}"
+        else
+            #binding.pry 
+            flash[:error] = "Failed to create post. Please fill out all fields: #{@user.errors.full_messages.to_sentence}"
+            erb :'/users/signup'
+
+        end
     end 
 
     #user logout
